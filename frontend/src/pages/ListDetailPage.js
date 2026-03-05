@@ -16,6 +16,7 @@ export default function ListDetailPage() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
+  const [removingId, setRemovingId] = useState(null);
 
   async function load() {
     setLoading(true);
@@ -30,6 +31,22 @@ export default function ListDetailPage() {
       setErr(e?.response?.data?.error || "Failed to load list");
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function removeTitle(e, titleId) {
+    e.stopPropagation();
+    setRemovingId(titleId);
+    try {
+      await api.delete(`/lists/${id}/items/${titleId}`);
+      setItems((prev) => prev.filter((it) => {
+        const tid = it.title?._id || it.titleId;
+        return tid !== titleId;
+      }));
+    } catch (e2) {
+      console.error(e2);
+    } finally {
+      setRemovingId(null);
     }
   }
 
@@ -231,8 +248,19 @@ export default function ListDetailPage() {
                     <div className="text-sm text-muted-foreground">No genres</div>
                   )}
 
-                  <div className="mt-4 text-xs text-muted-foreground opacity-0 transition group-hover:opacity-100">
-                    Click to open details →
+                  <div className="mt-4 flex items-center justify-between">
+                    <span className="text-xs text-muted-foreground opacity-0 transition group-hover:opacity-100">
+                      Click to open details →
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 px-2 text-xs text-destructive hover:bg-destructive/10 hover:text-destructive"
+                      onClick={(e) => removeTitle(e, titleId)}
+                      disabled={removingId === titleId}
+                    >
+                      {removingId === titleId ? "Removing…" : "Remove"}
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
