@@ -412,7 +412,7 @@ export default function TitlePage() {
                     ) : (
                       <>
                         <Button type="button" variant="outline" onClick={() => setStatus("want_to_watch")} disabled={actionLoading}>
-                          Want
+                          Want to watch
                         </Button>
                         <Button type="button" variant="outline" onClick={() => setStatus("watching")} disabled={actionLoading}>
                           Watching

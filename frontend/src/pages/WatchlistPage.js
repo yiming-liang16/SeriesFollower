@@ -176,7 +176,7 @@ async function saveProgress(identifier, itemId) {
 
             <div className="flex flex-wrap gap-2">
               <span className="inline-flex items-center rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-secondary-foreground">
-                Want {counts.want_to_watch}
+                Want to watch {counts.want_to_watch}
               </span>
               <span className="inline-flex items-center rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-secondary-foreground">
                 Watching {counts.watching}
@@ -196,7 +196,7 @@ async function saveProgress(identifier, itemId) {
       {/* List */}
       {filteredItems.length === 0 ? (
         <Card className="rounded-2xl">
-          <CardContent className="py-10">
+          <CardContent className="py-10 mt-5">
             <div className="text-center">
               <div className="text-base font-medium">No items found.</div>
               <div className="mt-1 text-sm text-muted-foreground">
@@ -308,7 +308,7 @@ async function saveProgress(identifier, itemId) {
                       size="sm"
                       onClick={() => updateStatus(identifier, "want_to_watch")}
                     >
-                      Want
+                      Want to watch
                     </Button>
 
                     <Button

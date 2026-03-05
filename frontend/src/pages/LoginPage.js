@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import { GoogleLogin } from "@react-oauth/google";
 import { api } from "../api";
@@ -15,7 +14,6 @@ import { Loader2 } from "lucide-react";
 
 export default function LoginPage() {
   const { signIn, signInWithToken } = useAuth();
-  const nav = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -38,7 +36,7 @@ export default function LoginPage() {
     setLoading(true);
     try {
       await signIn(username.trim(), password);
-      nav("/");
+      window.location.href = "/";
     } catch (e2) {
       setErr(e2?.response?.data?.error || "Login failed");
     } finally {
@@ -69,7 +67,7 @@ export default function LoginPage() {
         await signInWithToken(token);
       }
 
-      nav("/");
+      window.location.href = "/";
     } catch (e3) {
       setErr(e3?.response?.data?.error || "Google login failed");
     } finally {

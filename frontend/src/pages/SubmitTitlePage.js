@@ -222,7 +222,7 @@ export default function SubmitTitlePage() {
                   type="file"
                   accept="image/*"
                   onChange={onPickPoster}
-                  className="text-sm text-muted-foreground file:mr-3 file:rounded-md file:border file:border-border file:bg-background file:px-3 file:py-1 file:text-sm file:font-medium"
+                  className="block text-sm text-muted-foreground file:mr-3 file:rounded-md file:border file:border-border file:bg-background file:px-3 file:py-1 file:text-sm file:font-medium"
                 />
               )}
               <p className="text-xs text-muted-foreground">PNG / JPG / WEBP, max 5 MB</p>
