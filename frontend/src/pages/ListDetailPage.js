@@ -40,8 +40,8 @@ export default function ListDetailPage() {
     try {
       await api.delete(`/lists/${id}/items/${titleId}`);
       setItems((prev) => prev.filter((it) => {
-        const tid = it.title?._id || it.titleId;
-        return tid !== titleId;
+        const tid = it.titleId?._id || it.title?._id;
+        return String(tid) !== String(titleId);
       }));
     } catch (e2) {
       console.error(e2);
@@ -188,7 +188,7 @@ export default function ListDetailPage() {
       {items.length === 0 ? (
         <Card className="rounded-2xl">
           <CardContent className="py-10">
-            <div className="text-center">
+            <div className="text-center mt-5">
               <div className="text-base font-medium">No titles in this list yet.</div>
               <div className="mt-1 text-sm text-muted-foreground">
                 Add some titles from a movie/series page.
